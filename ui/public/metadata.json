@@ -1,0 +1,19 @@
+{
+  "name": "copyparty",
+  "description": {
+    "en": "Copyparty"
+  },
+  "categories": ["storage"],
+  "authors": [
+    {
+      "name": "Erik Petersen",
+      "email": "eht@it-trans.dk"
+    }
+  ],
+  "docs": {
+    "documentation_url": "https://github.com/epetersen-lab/",
+    "bug_url": "https://github.com/epetersen-lab/dev",
+    "code_url": "https://github.com/epetersen-lab"
+  },
+  "source": "ghcr.io/epetersen-lab"
+}

@@ -1,0 +1,6 @@
+#!/usr/bin/env python3
+
+import agent
+
+agent.run_helper("systemctl", "--user", "enable", "copyparty.service").check_returncode()
+agent.run_helper("systemctl", "--user", "restart", "copyparty.service").check_returncode()

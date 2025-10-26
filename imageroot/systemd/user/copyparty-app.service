@@ -1,0 +1,31 @@
+[Unit]
+Description=Podman copyparty-app.service
+BindsTo=copyparty.service
+After=copyparty.service
+
+[Service]
+Environment=PODMAN_SYSTEMD_UNIT=%n
+EnvironmentFile=%S/state/environment
+WorkingDirectory=%S/state
+Restart=always
+TimeoutStopSec=70
+ExecStartPre=/bin/rm -f %t/%n.pid %t/%n.ctr-id
+ExecStartPre=/usr/bin/bash -c "/bin/mkdir -p config"
+ExecStartPre=/usr/local/bin/runagent create_copyparty_conf
+ExecStart=/usr/bin/podman run --conmon-pidfile %t/%n.pid \
+    --cidfile=%t/%n.ctr-id \
+    --cgroups=no-conmon \
+    --pod-id-file %t/copyparty.service.pod-id \
+    --replace \
+    -d \
+    --name %n \
+    --volume files:/w \
+    --volume ./config:/cfg \
+    ${AC_IMAGE}
+ExecStop=/usr/bin/podman stop --ignore -t 10 --cidfile=%t/%n.ctr-id
+ExecStopPost=/usr/bin/podman rm -f --ignore -t 10 --cidfile=%t/%n.ctr-id
+Type=notify
+NotifyAccess=all
+
+[Install]
+WantedBy=default.target

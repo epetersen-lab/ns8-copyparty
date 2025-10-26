@@ -1,0 +1,19 @@
+#!/usr/bin/env python3
+
+import json
+import os
+import sys
+
+import agent
+
+data = json.load(sys.stdin)
+username = data["username"]
+password = data["password"]
+secrets_env = {
+    "COPYPARTY_USERNAME": username,
+    "COPYPARTY_PASSWORD": password,
+}
+agent.write_envfile("secrets.env", secrets_env)
+
+# set error validation
+agent.set_weight(os.path.basename(__file__), 0)

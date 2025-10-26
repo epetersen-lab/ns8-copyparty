@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Configure copyparty",
+  "$id": "Copyparty",
+  "description": "Configure copyparty",
+  "examples": [
+    {
+      "host": "copyparty.example.com",
+      "username": "copyparty",
+      "password": "secret",
+      "http2https": true,
+      "lets_encrypt": false
+    }
+  ],
+  "type": "object",
+  "required": [
+    "host",
+    "username",
+    "password",
+    "http2https",
+    "lets_encrypt"
+  ],
+  "properties": {
+    "host": {
+      "type": "string",
+      "description": "FQDN for Copyparty",
+      "format": "idn-hostname"
+    },
+    "username": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Default username for copyparty user, it can be changed later"
+    },
+    "password": {
+      "type": "string",
+      "description": "Default password for copyparty user, it can be changed later"
+    },
+    "lets_encrypt": {
+      "type": "boolean",
+      "title": "Let's Encrypt certificate",
+      "description": "Request a valid Let's Encrypt certificate."
+    },
+    "http2https": {
+      "type": "boolean",
+      "title": "HTTP to HTTPS redirection",
+      "description": "Redirect all the HTTP requests to HTTPS"
+    }
+  }
+}
