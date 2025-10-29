@@ -32,7 +32,8 @@
         "lets_encrypt": "Let's Encrypt",
         "http_to_https": "HTTP to HTTPS",
         "enabled": "Enabled",
-        "disabled": "Disabled"
+        "disabled": "Disabled",
+        "hostname_already_used_in_traefik": "This hostname is already used by another application in the web proxy."
     },
     "about": {
         "title": "About"
