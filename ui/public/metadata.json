@@ -1,7 +1,7 @@
 {
   "name": "copyparty",
   "description": {
-    "en": "Copyparty"
+    "en": "copyparty a file server with resumable uploads/downloads using any web browser"
   },
   "categories": ["storage"],
   "authors": [
@@ -11,9 +11,9 @@
     }
   ],
   "docs": {
-    "documentation_url": "https://github.com/epetersen-lab/",
-    "bug_url": "https://github.com/epetersen-lab/dev",
-    "code_url": "https://github.com/epetersen-lab"
+    "documentation_url": "https://github.com/epetersen-lab/ns8-copyparty",
+    "bug_url": "https://github.com/epetersen-lab/ns8-copyparty",
+    "code_url": "https://github.com/epetersen-lab/ns8-copyparty"
   },
-  "source": "ghcr.io/epetersen-lab"
+  "source": "ghcr.io/epetersen-lab/copyparty"
 }
