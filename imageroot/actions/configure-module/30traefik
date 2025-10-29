@@ -14,7 +14,7 @@ http2https = data.get("http2https", True)
 lets_encrypt = data.get("lets_encrypt", False)
 
 # Check if hostname is already in use by traefik
-if agent.http_route_in_use(domain=host):
+if (os.getenv("TRAEFIK_HOST") != host) and (agent.http_route_in_use(domain=host)):
     agent.set_status("validation-failed")
     json.dump(
         [
