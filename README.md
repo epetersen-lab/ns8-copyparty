@@ -2,7 +2,7 @@
 
 ## Warning
 
-- This is currently alpha stage.
+- This is currently beta stage.
 - Currently only the http/https protocols are provided.
 
 This module provides [copyparty](https://github.com/9001/copyparty) for NethServer 8.
