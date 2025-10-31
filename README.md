@@ -3,7 +3,7 @@
 ## Warning
 
 - This is currently beta stage.
-- Currently only the http/https protocols are provided.
+- Currently only the http/https and webdav protocols are provided.
 
 This module provides [copyparty](https://github.com/9001/copyparty) for NethServer 8.
 
