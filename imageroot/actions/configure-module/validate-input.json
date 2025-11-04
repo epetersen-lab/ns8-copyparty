@@ -5,27 +5,18 @@
   "description": "Configure copyparty",
   "examples": [
     {
-      "host": "copyparty.example.com",
       "username": "copyparty",
       "password": "secret",
-      "http2https": true,
-      "lets_encrypt": false
+      "http_port": 3923
     }
   ],
   "type": "object",
   "required": [
-    "host",
     "username",
     "password",
-    "http2https",
-    "lets_encrypt"
+    "http_port"
   ],
   "properties": {
-    "host": {
-      "type": "string",
-      "description": "FQDN for Copyparty",
-      "format": "idn-hostname"
-    },
     "username": {
       "type": [
         "string",
@@ -37,15 +28,12 @@
       "type": "string",
       "description": "Default password for copyparty user, it can be changed later"
     },
-    "lets_encrypt": {
-      "type": "boolean",
-      "title": "Let's Encrypt certificate",
-      "description": "Request a valid Let's Encrypt certificate."
-    },
-    "http2https": {
-      "type": "boolean",
-      "title": "HTTP to HTTPS redirection",
-      "description": "Redirect all the HTTP requests to HTTPS"
+    "http_port": {
+      "type": "integer",
+      "title": "port",
+      "description": "The port of the http service",
+      "minimum": 1024,
+      "maximum": 65535
     }
   }
 }

@@ -19,10 +19,6 @@
       <cv-column>
         <cv-tile light>
           <cv-form @submit.prevent="configureModule">
-            <cv-text-input :label="$t('settings.copyparty_fqdn')" placeholder="copyparty.example.com" v-model.trim="host"
-              class="mg-bottom" :invalid-message="$t(error.host)"
-              :disabled="loading.getConfiguration || loading.configureModule" ref="host">
-            </cv-text-input>
             <cv-text-input :label="$t('settings.username')" placeholder="copyparty" v-model.trim="username"
               class="mg-bottom" :invalid-message="$t(error.username)"
               :disabled="loading.getConfiguration || loading.configureModule" ref="username">
@@ -34,25 +30,10 @@
                 already_set
                 " ref="password">
             </cv-text-input>
-
-            <cv-toggle value="letsEncrypt" :label="$t('settings.lets_encrypt')" v-model="isLetsEncryptEnabled"
-              :disabled="loading.getConfiguration || loading.configureModule" class="mg-bottom">
-              <template slot="text-left">{{
-                $t("settings.disabled")
-                }}</template>
-              <template slot="text-right">{{
-                $t("settings.enabled")
-                }}</template>
-            </cv-toggle>
-            <cv-toggle value="httpToHttps" :label="$t('settings.http_to_https')" v-model="isHttpToHttpsEnabled"
-              :disabled="loading.getConfiguration || loading.configureModule" class="mg-bottom">
-              <template slot="text-left">{{
-                $t("settings.disabled")
-                }}</template>
-              <template slot="text-right">{{
-                $t("settings.enabled")
-                }}</template>
-            </cv-toggle>
+            <cv-text-input :label="$t('settings.http_port')" :placeholder="$t('common.eg_value', { value: '3923' })" type="number" v-model.trim="http_port"
+              class="mg-bottom" :invalid-message="$t(error.http_port)"
+              :disabled="loading.getConfiguration || loading.configureModule" ref="http_port">
+            </cv-text-input>
 
             <cv-row v-if="error.configureModule">
               <cv-column>
@@ -98,11 +79,9 @@ export default {
         page: "settings",
       },
       urlCheckInterval: null,
-      host: "",
       username: "",
       password: "",
-      isLetsEncryptEnabled: false,
-      isHttpToHttpsEnabled: false,
+      http_port: "",
       loading: {
         getConfiguration: false,
         configureModule: false,
@@ -110,11 +89,9 @@ export default {
       error: {
         getConfiguration: "",
         configureModule: "",
-        host: "",
         username: "",
         password: "",
-        lets_encrypt: "",
-        http2https: "",
+        http_port: "",
       },
     };
   },
@@ -181,27 +158,16 @@ export default {
       this.loading.getConfiguration = false;
       const config = taskResult.output;
 
-      this.host = config.host;
       this.username = config.username;
       this.password = config.password;
-      this.isLetsEncryptEnabled = config.lets_encrypt;
-      this.isHttpToHttpsEnabled = config.http2https;
+      this.http_port = config.http_port.toString();
 
       console.log("config", config);
-      this.focusElement("host");
+      this.focusElement("username");
     },
     validateConfigureModule() {
       this.clearErrors(this);
       let isValidationOk = true;
-
-      if (!this.host) {
-        this.error.host = this.$t("common.required");
-
-        if (isValidationOk) {
-          this.focusElement("host");
-          isValidationOk = false;
-        }
-      }
 
       if (!this.username) {
         this.error.username = "common.required";
@@ -220,6 +186,16 @@ export default {
         }
         isValidationOk = false;
       }
+
+      if (!this.http_port) {
+        this.error.http_port = "common.required";
+
+        if (isValidationOk) {
+          this.focusElement("http_port");
+        }
+        isValidationOk = false;
+      }
+
 
       return isValidationOk;
     },
@@ -273,11 +249,9 @@ export default {
         this.createModuleTaskForApp(this.instanceName, {
           action: taskAction,
           data: {
-            host: this.host,
             username: this.username,
             password: this.password,
-            lets_encrypt: this.isLetsEncryptEnabled,
-            http2https: this.isHttpToHttpsEnabled,
+            http_port: parseInt(this.http_port),
           },
           extra: {
             title: this.$t("settings.configure_instance", {

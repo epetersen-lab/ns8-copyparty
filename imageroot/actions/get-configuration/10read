@@ -9,9 +9,6 @@ import agent
 config = {}
 config["username"] = agent.read_envfile("secrets.env")["COPYPARTY_USERNAME"] if os.path.exists("secrets.env") else None
 config["password"] = agent.read_envfile("secrets.env")["COPYPARTY_PASSWORD"] if os.path.exists("secrets.env") else None
-config["host"] =  os.getenv("TRAEFIK_HOST")
-config["http2https"] =  os.getenv("TRAEFIK_HTTP2HTTPS") == "True"
-config["lets_encrypt"] =  os.getenv("TRAEFIK_LETS_ENCRYPT") == "True"
-
+config["http_port"] = int(os.environ.get("HTTP_PORT", ""))
 json.dump(config, fp=sys.stdout)
 

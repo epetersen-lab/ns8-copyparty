@@ -2,7 +2,8 @@
     "common": {
         "required": "Required",
         "work_in_progress": "Work in progress",
-        "processing": "Processing..."
+        "processing": "Processing...",
+        "eg_value": "E.g. {value}"
     },
     "status": {
         "title": "Status",
@@ -24,13 +25,11 @@
         "title": "Settings",
         "configure_instance": "Configure {instance}",
         "save": "Save",
-        "copyparty_fqdn": "FQDN for copyparty",
+        "http_port": "HTTP port",
         "username": "Username",
         "password": "Password",
         "show_password": "Show password",
         "hide_password": "Hide password",
-        "lets_encrypt": "Let's Encrypt",
-        "http_to_https": "HTTP to HTTPS",
         "enabled": "Enabled",
         "disabled": "Disabled",
         "hostname_already_used_in_traefik": "This hostname is already used by another application in the web proxy."

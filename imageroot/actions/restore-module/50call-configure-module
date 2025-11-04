@@ -14,11 +14,8 @@ configure_retval = agent.tasks.run(
     data={
         "username": agent.read_envfile("secrets.env")["COPYPARTY_USERNAME"] if os.path.exists("secrets.env") else None,
         "password": agent.read_envfile("secrets.env")["COPYPARTY_PASSWORD"] if os.path.exists("secrets.env") else None,
-        "host": environment["TRAEFIK_HOST"],
-        "http2https": environment["TRAEFIK_HTTP2HTTPS"] == "True",
-        "lets_encrypt": environment["TRAEFIK_LETS_ENCRYPT"] == "True",
-    },
-)
+        "http_port": environment["http_port"],
+    })
 agent.assert_exp(
     configure_retval["exit_code"] == 0, "The configure-module subtask failed!"
 )
