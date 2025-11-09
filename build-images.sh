@@ -14,7 +14,7 @@ images=()
 repobase="${REPOBASE:-ghcr.io/epetersen-lab}"
 # Configure the image name
 reponame="copyparty"
-copyparty_version="1.19.17"
+copyparty_version="1.19.18"
 
 # Create a new empty container image
 container=$(buildah from scratch)
